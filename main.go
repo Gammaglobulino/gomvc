@@ -1,6 +1,7 @@
 package main
 
+import "../mvc/app"
 
-func main(){
-	
+func main() {
+	app.StartApp()
 }
