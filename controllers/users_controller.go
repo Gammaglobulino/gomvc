@@ -20,7 +20,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		utils.WriteErrtoHttp(w, userErr)
 		return
 	}
-	user, err := services.GetUser(userId)
+	user, err := services.UserService.GetUser(userId)
 	if err != nil {
 		utils.WriteErrtoHttp(w, err)
 		return

@@ -3,19 +3,33 @@ package models
 import (
 	"../utils"
 	"fmt"
+	"log"
 	"net/http"
 )
 
-var users = map[int64]*User{
-	123: &User{
-		Id:        123,
-		FirstName: "Andrea",
-		LastName:  "Mazzanti",
-		Email:     "mazzantia@hotmail.com",
-	},
+var (
+	users = map[int64]*User{
+		123: &User{
+			Id:        123,
+			FirstName: "Andrea",
+			LastName:  "Mazzanti",
+			Email:     "mazzantia@hotmail.com",
+		},
+	}
+	UserDto usersServiceInterface
+)
+
+func init() {
+	UserDto = &userDto{}
 }
 
-func GetUser(userId int64) (*User, *utils.AppError) {
+type usersServiceInterface interface {
+	GetUser(int642 int64) (*User, *utils.AppError)
+}
+type userDto struct{}
+
+func (u *userDto) GetUser(userId int64) (*User, *utils.AppError) {
+	log.Println("We are accessing the Database")
 	if user := users[userId]; user != nil {
 		return user, nil
 	}
